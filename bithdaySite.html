@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan de Table</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .table-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 100%;
+            padding: 0 10px;
+        }
+
+        .table {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+            padding: 20px;
+            width: calc(100% - 40px);
+            max-width: 300px;
+            text-align: center;
+        }
+
+        .table h2 {
+            margin: 0;
+            font-size: 24px;
+            color: #b98406;
+        }
+
+        .invite-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 20px 0 0;
+        }
+
+        .invite-list li {
+            font-size: 18px;
+            padding: 8px 0;
+            border-bottom: 1px solid #ddd;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .invite-list li.present {
+            text-decoration: line-through;
+            color: #999;
+        }
+
+        .invite-list li:hover {
+            background-color: #f0f0f0;
+        }
+
+        /* Responsive adjustments */
+        @media (min-width: 600px) {
+            .table {
+                width: calc(50% - 40px);
+            }
+        }
+
+        @media (min-width: 900px) {
+            .table {
+                width: calc(33.33% - 40px);
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .table {
+                width: calc(25% - 40px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Plan de Table des Invités</h1>
+
+    <div class="table-container">
+        <!-- Les tables et les invités seront insérés ici par JavaScript -->
+    </div>
+    <script>
+        const tables = {
+            "MAJESTE": ["DIDIA", "MERVEILLE", "KENNEDY", "DIDIA", "THIERRY", "SHEILA", "NARCOS"],
+            "VICOMTESSE": ["SARAH", "NELLIE", "ORNELIA", "HERVE", "MICKEY", "FELIX", "ARTHUR SMITH"],
+            "SOUVERAIN": ["STELLA", "LAETITIA", "JNR-MSN", "VINCENT", "JOSIAS", "AARON", "ARDILES"],
+            "DYNASTIE": ["LOIC", "CHRISTOPHER", "PRINCE FRITITI", "JOSEPHA", "ASVINE", "ISSIFOU"],
+            "DUCHESSE": ["NOE", "GAETAN", "MAESTRO", "ISAAC", "SAMIRA", "ELA", "JOSEPH"],
+            "BUCKINGHAM": ["NADJAT", "NAZIM", "JAHEL", "AMEN", "ARTHUR", "JEAN MARCEL", "GRACIA"],
+            "WINDSOR": ["GODWIN", "YOLANDE", "JOSEPH", "OZIAS", "FAOUZANE", "NADIA"],
+            "NOBLESSE": ["M.VOULE-FRITITI", "Mme VOULE", "MARC.FREIAS", "FREITAS N", "M.AMEGA", "Mme AMEGA"]
+        };
+
+        const container = document.querySelector('.table-container');
+
+        for (const [tableName, invites] of Object.entries(tables)) {
+            const tableElement = document.createElement('div');
+            tableElement.className = 'table';
+            tableElement.innerHTML = `<h2>Table ${tableName}</h2>`;
+
+            const inviteList = document.createElement('ul');
+            inviteList.className = 'invite-list';
+
+            invites.forEach(invite => {
+                const inviteItem = document.createElement('li');
+                inviteItem.textContent = invite;
+                inviteItem.onclick = () => {
+                    inviteItem.classList.toggle('present');
+                };
+                inviteList.appendChild(inviteItem);
+            });
+
+            tableElement.appendChild(inviteList);
+            container.appendChild(tableElement);
+        }
+    </script>
+</body>
+</html>
